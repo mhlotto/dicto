@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "whisper_cpp_build/src",
+		"source" : "/Users/arr/repos/mhlotto/dicto/third_party/whisper.cpp/src"
+	}
+}

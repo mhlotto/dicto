@@ -1,0 +1,597 @@
+{
+	"inputs" : 
+	[
+		{
+			"path" : "CMakeLists.txt"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "/Users/arr/repos/mhlotto/dicto/app/.cxx/Debug/1dl6l5g6/arm64-v8a/CMakeFiles/4.1.2-gc33710e/CMakeSystem.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/ndk/27.0.12077973/build/cmake/android.toolchain.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/ndk/27.0.12077973/build/cmake/android-legacy.toolchain.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/ndk/27.0.12077973/build/cmake/abis.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/ndk/27.0.12077973/build/cmake/platforms.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/CMakeSystemSpecificInitialize.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/Platform/Android-Initialize.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/ndk/27.0.12077973/build/cmake/hooks/pre/Android-Initialize.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/Platform/Linux-Initialize.cmake"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "/Users/arr/repos/mhlotto/dicto/app/.cxx/Debug/1dl6l5g6/arm64-v8a/CMakeFiles/4.1.2-gc33710e/CMakeCCompiler.cmake"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "/Users/arr/repos/mhlotto/dicto/app/.cxx/Debug/1dl6l5g6/arm64-v8a/CMakeFiles/4.1.2-gc33710e/CMakeCXXCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/CMakeSystemSpecificInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/CMakeGenericSystem.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/CMakeInitializeConfigs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/Platform/Android.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/ndk/27.0.12077973/build/cmake/hooks/pre/Android.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/Platform/Linux.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/Platform/UnixPaths.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/CMakeCInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/CMakeLanguageInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/Compiler/Clang-C.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/Compiler/Clang.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/Compiler/CMakeCommonCompilerMacros.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/Compiler/GNU.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/Compiler/CMakeCommonCompilerMacros.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/Platform/Android-Clang-C.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/Platform/Android-Clang.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/ndk/27.0.12077973/build/cmake/hooks/pre/Android-Clang.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/ndk/27.0.12077973/build/cmake/flags.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/CMakeCommonLanguageInclude.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/Internal/CMakeCLinkerInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/Internal/CMakeCommonLinkerInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/Linker/LLD-C.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/Linker/LLD.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/Linker/GNU.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/Platform/Linker/Android-LLD-C.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/Platform/Linker/Linux-LLD-C.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/Platform/Linker/Linux-LLD.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/Platform/Linker/Linux-GNU.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/Platform/Linker/GNU.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/CMakeCXXInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/CMakeLanguageInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/Compiler/Clang-CXX.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/Compiler/Clang.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/Platform/Android-Clang-CXX.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/Platform/Android-Clang.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/CMakeCommonLanguageInclude.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/Internal/CMakeCXXLinkerInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/Internal/CMakeCommonLinkerInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/Linker/LLD-CXX.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/Linker/LLD.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/Linker/GNU.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/Platform/Linker/Android-LLD-CXX.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/Platform/Linker/Linux-LLD-CXX.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/Platform/Linker/Linux-LLD.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/Users/arr/repos/mhlotto/dicto/third_party/whisper.cpp/CMakeLists.txt"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/CheckIncludeFileCXX.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/Users/arr/repos/mhlotto/dicto/third_party/whisper.cpp/cmake/build-info.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/FindGit.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/FindPackageHandleStandardArgs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/FindPackageMessage.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/GNUInstallDirs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/CMakePackageConfigHelpers.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/WriteBasicConfigVersionFile.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/Users/arr/repos/mhlotto/dicto/third_party/whisper.cpp/cmake/whisper-config.cmake.in"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/BasicConfigVersion-SameMajorVersion.cmake.in"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/Users/arr/repos/mhlotto/dicto/third_party/whisper.cpp/cmake/whisper.pc.in"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/Users/arr/repos/mhlotto/dicto/third_party/whisper.cpp/ggml/CMakeLists.txt"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/CMakeDetermineASMCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/CMakeDetermineCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/CMakeCompilerIdDetection.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/Compiler/Clang-FindBinUtils.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/CMakeASMCompiler.cmake.in"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "/Users/arr/repos/mhlotto/dicto/app/.cxx/Debug/1dl6l5g6/arm64-v8a/CMakeFiles/4.1.2-gc33710e/CMakeASMCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/CMakeASMInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/Compiler/Clang-ASM.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/Compiler/Clang.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/Platform/Android-Clang-ASM.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/Platform/Android-Clang.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/CMakeTestASMCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/Internal/CMakeASMLinkerInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/Platform/Linker/Android-ASM.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/Platform/Linker/Android-GNU-ASM.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/Platform/Linker/Linux-GNU-ASM.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/Platform/Linker/Linux-GNU.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/Internal/CMakeInspectASMLinker.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/CMakeASMCompiler.cmake.in"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/CheckIncludeFileCXX.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/FindThreads.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/CheckLibraryExists.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/CheckIncludeFile.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/CheckCSourceCompiles.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/Internal/CheckSourceCompiles.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/FindPackageHandleStandardArgs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/FindPackageMessage.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/GNUInstallDirs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/CMakePackageConfigHelpers.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/WriteBasicConfigVersionFile.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/Users/arr/repos/mhlotto/dicto/third_party/whisper.cpp/ggml/cmake/ggml-config.cmake.in"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/BasicConfigVersion-SameMajorVersion.cmake.in"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/Users/arr/repos/mhlotto/dicto/third_party/whisper.cpp/ggml/src/CMakeLists.txt"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/CheckCXXCompilerFlag.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/Internal/CheckCompilerFlag.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/Internal/CheckFlagCommonConfig.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/Internal/CheckSourceCompiles.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/CheckCXXSourceCompiles.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/Internal/CheckSourceCompiles.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/Users/arr/repos/mhlotto/dicto/third_party/whisper.cpp/ggml/cmake/common.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/CheckCXXSourceCompiles.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/Users/arr/repos/mhlotto/dicto/third_party/whisper.cpp/ggml/src/ggml-cpu/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/Users/arr/repos/mhlotto/dicto/third_party/whisper.cpp/src/CMakeLists.txt"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/FindThreads.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/CheckLibraryExists.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/CheckIncludeFile.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/CheckCSourceCompiles.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/FindPackageHandleStandardArgs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Users/arr/Library/Android/sdk/cmake/4.1.2/share/cmake-4.1/Modules/FindPackageMessage.cmake"
+		}
+	],
+	"kind" : "cmakeFiles",
+	"paths" : 
+	{
+		"build" : "/Users/arr/repos/mhlotto/dicto/app/.cxx/Debug/1dl6l5g6/arm64-v8a",
+		"source" : "/Users/arr/repos/mhlotto/dicto/app/src/main/cpp"
+	},
+	"version" : 
+	{
+		"major" : 1,
+		"minor" : 1
+	}
+}

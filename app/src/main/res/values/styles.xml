@@ -1,0 +1,7 @@
+<resources>
+    <style name="Theme.Dicto" parent="android:style/Theme.Material.Light.NoActionBar">
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:navigationBarColor">#F5EFE6</item>
+        <item name="android:statusBarColor">#F5EFE6</item>
+    </style>
+</resources>

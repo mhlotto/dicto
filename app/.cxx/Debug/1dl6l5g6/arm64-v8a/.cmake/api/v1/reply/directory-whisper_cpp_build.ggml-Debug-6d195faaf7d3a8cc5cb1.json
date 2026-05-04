@@ -1,0 +1,107 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"install"
+		],
+		"files" : 
+		[
+			"/Users/arr/repos/mhlotto/dicto/third_party/whisper.cpp/ggml/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 346,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 347,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 415,
+				"parent" : 0
+			}
+		]
+	},
+	"installers" : 
+	[
+		{
+			"backtrace" : 1,
+			"component" : "Unspecified",
+			"destination" : "lib",
+			"paths" : 
+			[
+				"whisper_cpp_build/ggml/src/libggml.a"
+			],
+			"targetId" : "ggml::@4ae1f489fe438569ad2e",
+			"targetIndex" : 0,
+			"type" : "target"
+		},
+		{
+			"backtrace" : 1,
+			"component" : "Unspecified",
+			"destination" : "include",
+			"paths" : 
+			[
+				"/Users/arr/repos/mhlotto/dicto/third_party/whisper.cpp/ggml/include/ggml.h",
+				"/Users/arr/repos/mhlotto/dicto/third_party/whisper.cpp/ggml/include/ggml-cpu.h",
+				"/Users/arr/repos/mhlotto/dicto/third_party/whisper.cpp/ggml/include/ggml-alloc.h",
+				"/Users/arr/repos/mhlotto/dicto/third_party/whisper.cpp/ggml/include/ggml-backend.h",
+				"/Users/arr/repos/mhlotto/dicto/third_party/whisper.cpp/ggml/include/ggml-blas.h",
+				"/Users/arr/repos/mhlotto/dicto/third_party/whisper.cpp/ggml/include/ggml-cann.h",
+				"/Users/arr/repos/mhlotto/dicto/third_party/whisper.cpp/ggml/include/ggml-cpp.h",
+				"/Users/arr/repos/mhlotto/dicto/third_party/whisper.cpp/ggml/include/ggml-cuda.h",
+				"/Users/arr/repos/mhlotto/dicto/third_party/whisper.cpp/ggml/include/ggml-opt.h",
+				"/Users/arr/repos/mhlotto/dicto/third_party/whisper.cpp/ggml/include/ggml-metal.h",
+				"/Users/arr/repos/mhlotto/dicto/third_party/whisper.cpp/ggml/include/ggml-rpc.h",
+				"/Users/arr/repos/mhlotto/dicto/third_party/whisper.cpp/ggml/include/ggml-virtgpu.h",
+				"/Users/arr/repos/mhlotto/dicto/third_party/whisper.cpp/ggml/include/ggml-sycl.h",
+				"/Users/arr/repos/mhlotto/dicto/third_party/whisper.cpp/ggml/include/ggml-vulkan.h",
+				"/Users/arr/repos/mhlotto/dicto/third_party/whisper.cpp/ggml/include/ggml-webgpu.h",
+				"/Users/arr/repos/mhlotto/dicto/third_party/whisper.cpp/ggml/include/ggml-zendnn.h",
+				"/Users/arr/repos/mhlotto/dicto/third_party/whisper.cpp/ggml/include/ggml-openvino.h",
+				"/Users/arr/repos/mhlotto/dicto/third_party/whisper.cpp/ggml/include/gguf.h"
+			],
+			"type" : "file"
+		},
+		{
+			"backtrace" : 2,
+			"component" : "Unspecified",
+			"destination" : "lib",
+			"paths" : 
+			[
+				"whisper_cpp_build/ggml/src/libggml-base.a"
+			],
+			"targetId" : "ggml-base::@4ae1f489fe438569ad2e",
+			"targetIndex" : 1,
+			"type" : "target"
+		},
+		{
+			"backtrace" : 3,
+			"component" : "Unspecified",
+			"destination" : "lib/cmake/ggml",
+			"paths" : 
+			[
+				"/Users/arr/repos/mhlotto/dicto/app/.cxx/Debug/1dl6l5g6/arm64-v8a/whisper_cpp_build/ggml/ggml-config.cmake",
+				"/Users/arr/repos/mhlotto/dicto/app/.cxx/Debug/1dl6l5g6/arm64-v8a/whisper_cpp_build/ggml/ggml-version.cmake"
+			],
+			"type" : "file"
+		}
+	],
+	"paths" : 
+	{
+		"build" : "whisper_cpp_build/ggml",
+		"source" : "/Users/arr/repos/mhlotto/dicto/third_party/whisper.cpp/ggml"
+	}
+}
