@@ -1,7 +1,8 @@
 # Local Whisper Engine
 
 Dicto has a replaceable `DictationEngine` abstraction. The default engine remains Android
-`SpeechRecognizer`. A local `whisper.cpp` engine is scaffolded for on-device testing.
+`SpeechRecognizer`. A local `whisper.cpp` engine is included in the same dev-installed APK as the
+other dictation engines.
 
 ## Model File
 
@@ -11,13 +12,9 @@ For development, Dicto packages Whisper models in:
 app/src/main/assets/models/
 ```
 
-The default build uses `ggml-tiny.en.bin`. Override it at build time:
-
-```bash
-gradle :app:assembleDebug \
-  -Pdicto.enableWhisperNative=true \
-  -Pdicto.whisperModelAsset=ggml-base.en-q5_1.bin
-```
+The default build uses `ggml-tiny.en.bin` as the initial packaged Whisper model. Additional `.bin`
+models may also live in the assets directory for development, and the in-app import button remains
+available for testing another model path.
 
 On first launch or before Whisper engine selection, `WhisperModelManager` copies the configured
 asset to:
@@ -47,18 +44,18 @@ third_party/whisper.cpp
 Then build with native support enabled:
 
 ```bash
-gradle :app:assembleDebug -Pdicto.enableWhisperNative=true
+gradle :app:assembleDebug
 ```
 
-The default Gradle build does not enable CMake. Native builds require the local `third_party`
-checkout.
+The Gradle build always enables CMake now. Native builds require the local `third_party` checkout.
 
 ## Engine Selection
 
-The app has a small debug section with three runtime choices:
+The app has a small debug section with runtime choices:
 
 - `SpeechRecognizer`
 - `Whisper local`
+- `Vosk local`
 - `Auto`
 
 `Auto` uses Whisper only when:
@@ -66,7 +63,8 @@ The app has a small debug section with three runtime choices:
 - the native `dicto_whisper` library loads successfully,
 - the configured model file exists,
 
-Otherwise `Auto` falls back to Android `SpeechRecognizer`.
+Otherwise `Auto` tries Vosk when its bundled model exists and can be opened, then falls back to
+Android `SpeechRecognizer`.
 
 ## ABI
 

@@ -34,6 +34,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -251,7 +252,6 @@ private fun DictationScreen(
                 onEngineChoiceSelected = onEngineChoiceSelected,
                 onImportWhisperModel = onImportWhisperModel,
             )
-            TranscriptCard(title = "Rolling draft", body = state.rollingDraft, accent = Color(0xFFF4C95D))
             TranscriptCard(title = "Live partial", body = state.livePartial, accent = Color(0xFF8BC6A8))
             TranscriptCard(title = "Committed transcript", body = state.committedTranscript, accent = Color(0xFFD9A86C))
             Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
@@ -340,29 +340,64 @@ private fun DictationEngineDebugPanel(
                     onClick = { onEngineChoiceSelected(DictationEngineChoice.Vosk) },
                 )
             }
-            Text(
-                "Whisper native: ${if (engineSettings.whisperNativeAvailable) "available" else "not available"}",
-                color = Color(0xFFEFE1C8),
-            )
-            Text(
-                "Whisper model: ${if (engineSettings.whisperModelExists) "found" else "missing"}",
-                color = Color(0xFFEFE1C8),
-            )
-            Text(engineSettings.modelPath, color = Color(0xFFCABCA4), style = MaterialTheme.typography.bodySmall)
-            Text(
-                "Vosk bundled model: ${if (engineSettings.voskBundledModelExists) "available" else "missing"}",
-                color = Color(0xFFEFE1C8),
-            )
-            Text(
-                "Vosk copied model: ${if (engineSettings.voskModelExists) "found" else "missing"}",
-                color = Color(0xFFEFE1C8),
-            )
-            Text(engineSettings.voskModelPath, color = Color(0xFFCABCA4), style = MaterialTheme.typography.bodySmall)
-            Button(onClick = onImportWhisperModel) {
-                Text("Import Whisper .bin")
+            when (engineSettings.choice) {
+                DictationEngineChoice.Auto -> AutoEngineDetails(engineSettings)
+                DictationEngineChoice.SpeechRecognizer -> SpeechRecognizerEngineDetails()
+                DictationEngineChoice.Whisper -> WhisperEngineDetails(
+                    engineSettings = engineSettings,
+                    onImportWhisperModel = onImportWhisperModel,
+                )
+                DictationEngineChoice.Vosk -> VoskEngineDetails(engineSettings)
             }
         }
     }
+}
+
+@Composable
+private fun AutoEngineDetails(engineSettings: DictationEngineSettingsState) {
+    val selected = when {
+        engineSettings.whisperNativeAvailable && engineSettings.whisperModelExists -> "Whisper local"
+        engineSettings.voskModelExists -> "Vosk local"
+        else -> "SpeechRecognizer"
+    }
+    Text("Auto selected engine: $selected", color = Color(0xFFEFE1C8))
+}
+
+@Composable
+private fun SpeechRecognizerEngineDetails() {
+    Text("Uses Android SpeechRecognizer with on-device recognition when available.", color = Color(0xFFEFE1C8))
+}
+
+@Composable
+private fun WhisperEngineDetails(
+    engineSettings: DictationEngineSettingsState,
+    onImportWhisperModel: () -> Unit,
+) {
+    Text(
+        "Whisper native: ${if (engineSettings.whisperNativeAvailable) "available" else "not available"}",
+        color = Color(0xFFEFE1C8),
+    )
+    Text(
+        "Whisper model: ${if (engineSettings.whisperModelExists) "found" else "missing"}",
+        color = Color(0xFFEFE1C8),
+    )
+    Text(engineSettings.modelPath, color = Color(0xFFCABCA4), style = MaterialTheme.typography.bodySmall)
+    Button(onClick = onImportWhisperModel) {
+        Text("Import Whisper .bin")
+    }
+}
+
+@Composable
+private fun VoskEngineDetails(engineSettings: DictationEngineSettingsState) {
+    Text(
+        "Vosk bundled model: ${if (engineSettings.voskBundledModelExists) "available" else "missing"}",
+        color = Color(0xFFEFE1C8),
+    )
+    Text(
+        "Vosk copied model: ${if (engineSettings.voskModelExists) "found" else "missing"}",
+        color = Color(0xFFEFE1C8),
+    )
+    Text(engineSettings.voskModelPath, color = Color(0xFFCABCA4), style = MaterialTheme.typography.bodySmall)
 }
 
 @Composable
@@ -392,7 +427,7 @@ private fun EditScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFFF5EFE6))
+            .background(Color(0xFF050505))
             .verticalScroll(rememberScrollState())
             .padding(20.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
@@ -406,12 +441,23 @@ private fun EditScreen(
             text = "Manual edit",
             style = MaterialTheme.typography.headlineLarge,
             fontWeight = FontWeight.Black,
-            color = Color(0xFF1D1811),
+            color = Color(0xFFF4C95D),
         )
         ProjectPills(
             projects = state.projects,
             selectedProjectId = state.editProjectId,
             onProjectSelected = onProjectSelected,
+        )
+        val editFieldColors = OutlinedTextFieldDefaults.colors(
+            focusedTextColor = Color(0xFFF5EFE6),
+            unfocusedTextColor = Color(0xFFF5EFE6),
+            focusedContainerColor = Color(0xFF151515),
+            unfocusedContainerColor = Color(0xFF151515),
+            focusedLabelColor = Color(0xFFF4C95D),
+            unfocusedLabelColor = Color(0xFFCABCA4),
+            focusedBorderColor = Color(0xFFF4C95D),
+            unfocusedBorderColor = Color(0xFF6C5A3F),
+            cursorColor = Color(0xFFF4C95D),
         )
         OutlinedTextField(
             value = state.editTitle,
@@ -419,6 +465,7 @@ private fun EditScreen(
             modifier = Modifier.fillMaxWidth(),
             label = { Text("Title") },
             singleLine = true,
+            colors = editFieldColors,
         )
         OutlinedTextField(
             value = state.editBody,
@@ -427,6 +474,7 @@ private fun EditScreen(
                 .fillMaxWidth()
                 .height(320.dp),
             label = { Text("Body") },
+            colors = editFieldColors,
         )
         Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
             TextButton(

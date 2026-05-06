@@ -39,12 +39,10 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
-    if (providers.gradleProperty("dicto.enableWhisperNative").orNull == "true") {
-        externalNativeBuild {
-            cmake {
-                path = file("src/main/cpp/CMakeLists.txt")
-                version = "4.1.2"
-            }
+    externalNativeBuild {
+        cmake {
+            path = file("src/main/cpp/CMakeLists.txt")
+            version = "4.1.2"
         }
     }
 }
