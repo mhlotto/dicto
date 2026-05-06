@@ -41,6 +41,7 @@ data class AppUiState(
     val editTitle: String = "",
     val editBody: String = "",
     val editProjectId: Long? = null,
+    val dictationCommandTrigger: String = DictationCommandFormatter.DEFAULT_TRIGGER_PHRASE,
 )
 
 sealed interface AppScreen {
@@ -53,6 +54,7 @@ class AppViewModel(
     private val repository: DictoRepository,
     private val dictationEngineFactory: DictationEngineFactory,
     private val dictationEngineSettings: DictationEngineSettings,
+    private val dictationCommandSettings: DictationCommandSettings,
 ) : ViewModel() {
     private var dictationEngine = dictationEngineFactory.create()
     private val selectedProjectId = MutableStateFlow<Long?>(null)
@@ -61,6 +63,7 @@ class AppViewModel(
     private val _dictationState = MutableStateFlow(dictationEngine.state.value)
     val dictationState: StateFlow<DictationState> = _dictationState.asStateFlow()
     val engineSettingsState: StateFlow<DictationEngineSettingsState> = dictationEngineSettings.state
+    val commandSettingsState: StateFlow<DictationCommandSettingsState> = dictationCommandSettings.state
 
     private val notes = selectedProjectId.flatMapLatest { projectId ->
         if (projectId == null) flowOf(emptyList()) else repository.observeNotes(projectId)
@@ -96,6 +99,14 @@ class AppViewModel(
         viewModelScope.launch {
             notes.collect { noteList ->
                 _uiState.update { it.copy(notes = noteList) }
+            }
+        }
+        viewModelScope.launch {
+            dictationCommandSettings.state.collect { commandSettings ->
+                _uiState.update {
+                    it.copy(dictationCommandTrigger = commandSettings.triggerPhrase)
+                }
+                onDictationState(dictationEngine.state.value)
             }
         }
         bindDictationEngine()
@@ -173,6 +184,10 @@ class AppViewModel(
             replaceDictationEngine()
             _uiState.update { it.copy(statusMessage = "Imported Whisper model: $path") }
         }
+    }
+
+    fun updateDictationCommandTrigger(value: String) {
+        dictationCommandSettings.setTriggerPhrase(value)
     }
 
     fun clearDraft() {
@@ -300,8 +315,8 @@ class AppViewModel(
 
     private fun DictationState.withFormattedCommands(): DictationState {
         return copy(
-            committedText = DictationCommandFormatter.format(committedText),
-            partialText = DictationCommandFormatter.format(partialText),
+            committedText = DictationCommandFormatter.format(committedText, commandSettingsState.value.triggerPhrase),
+            partialText = DictationCommandFormatter.format(partialText, commandSettingsState.value.triggerPhrase),
         )
     }
 
@@ -382,6 +397,7 @@ class AppViewModelFactory(
             repository = application.repository,
             dictationEngineFactory = application.dictationEngineFactory,
             dictationEngineSettings = application.dictationEngineSettings,
+            dictationCommandSettings = application.dictationCommandSettings,
         ) as T
     }
 }

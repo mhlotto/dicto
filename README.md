@@ -3,19 +3,23 @@ dictation toy app
 
 ## Usage Aids
 
-While dictating, say `dictate replace` followed by one of these commands to insert punctuation or spacing:
+While dictating, say `zeta` followed by one of these commands to insert punctuation, spacing, or apply a small edit. The trigger word defaults to `zeta`, but you can change it in the app under the Dictation engine section.
 
 | Spoken command | Inserts |
 | --- | --- |
-| `dictate replace new line` | newline |
-| `dictate replace newline` | newline |
-| `dictate replace period` | `.` |
-| `dictate replace question` | `?` |
-| `dictate replace question mark` | `?` |
-| `dictate replace exclamation` | `!` |
-| `dictate replace exclamation point` | `!` |
-| `dictate replace colon` | `:` |
-| `dictate replace dash` | `-` |
-| `dictate replace tab` | tab |
+| `zeta new line` | newline |
+| `zeta newline` | newline |
+| `zeta period` | `.` |
+| `zeta question` | `?` |
+| `zeta question mark` | `?` |
+| `zeta exclamation` | `!` |
+| `zeta exclamation point` | `!` |
+| `zeta colon` | `:` |
+| `zeta dash` | `-` |
+| `zeta tab` | tab |
+| `zeta delete five` | deletes the command and the previous 5 words |
+| `zeta delete 5` | deletes the command and the previous 5 words |
 
-If the words after `dictate replace` do not match a command, Dicto keeps the spoken words as normal transcript text.
+For delete counts, Dicto also accepts common speech-to-text homophones such as `won`, `to`, `too`, `for`, `fore`, `sex`, and `tin`.
+
+If the words after the configured trigger do not match a command, Dicto keeps the spoken words as normal transcript text.

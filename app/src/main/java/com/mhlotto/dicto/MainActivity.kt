@@ -145,6 +145,7 @@ private fun DictoApp(viewModel: AppViewModel) {
                 onClearDraft = viewModel::clearDraft,
                 onEditNote = viewModel::openEdit,
                 onEngineChoiceSelected = viewModel::setEngineChoice,
+                onDictationCommandTriggerChanged = viewModel::updateDictationCommandTrigger,
                 onImportWhisperModel = {
                     modelPickerLauncher.launch(
                         arrayOf(
@@ -186,6 +187,7 @@ private fun DictationScreen(
     onClearDraft: () -> Unit,
     onEditNote: (Long) -> Unit,
     onEngineChoiceSelected: (DictationEngineChoice) -> Unit,
+    onDictationCommandTriggerChanged: (String) -> Unit,
     onImportWhisperModel: () -> Unit,
     onShare: (String, String, String) -> Unit,
 ) {
@@ -249,7 +251,9 @@ private fun DictationScreen(
             )
             DictationEngineDebugPanel(
                 engineSettings = engineSettings,
+                dictationCommandTrigger = state.dictationCommandTrigger,
                 onEngineChoiceSelected = onEngineChoiceSelected,
+                onDictationCommandTriggerChanged = onDictationCommandTriggerChanged,
                 onImportWhisperModel = onImportWhisperModel,
             )
             TranscriptCard(title = "Live partial", body = state.livePartial, accent = Color(0xFF8BC6A8))
@@ -309,7 +313,9 @@ private fun DictationScreen(
 @Composable
 private fun DictationEngineDebugPanel(
     engineSettings: DictationEngineSettingsState,
+    dictationCommandTrigger: String,
     onEngineChoiceSelected: (DictationEngineChoice) -> Unit,
+    onDictationCommandTriggerChanged: (String) -> Unit,
     onImportWhisperModel: () -> Unit,
 ) {
     Card(colors = CardDefaults.cardColors(containerColor = Color(0xFF2A241B))) {
@@ -349,6 +355,10 @@ private fun DictationEngineDebugPanel(
                 )
                 DictationEngineChoice.Vosk -> VoskEngineDetails(engineSettings)
             }
+            DictationCommandDetails(
+                triggerPhrase = dictationCommandTrigger,
+                onTriggerPhraseChanged = onDictationCommandTriggerChanged,
+            )
         }
     }
 }
@@ -398,6 +408,26 @@ private fun VoskEngineDetails(engineSettings: DictationEngineSettingsState) {
         color = Color(0xFFEFE1C8),
     )
     Text(engineSettings.voskModelPath, color = Color(0xFFCABCA4), style = MaterialTheme.typography.bodySmall)
+}
+
+@Composable
+private fun DictationCommandDetails(
+    triggerPhrase: String,
+    onTriggerPhraseChanged: (String) -> Unit,
+) {
+    Text("Dictation command trigger", color = Color(0xFFF4C95D), fontWeight = FontWeight.Bold)
+    OutlinedTextField(
+        value = triggerPhrase,
+        onValueChange = onTriggerPhraseChanged,
+        modifier = Modifier.fillMaxWidth(),
+        label = { Text("Replacement trigger") },
+        singleLine = true,
+    )
+    Text(
+        "Say \"$triggerPhrase new line\" or \"$triggerPhrase period\" while dictating.",
+        color = Color(0xFFCABCA4),
+        style = MaterialTheme.typography.bodySmall,
+    )
 }
 
 @Composable
