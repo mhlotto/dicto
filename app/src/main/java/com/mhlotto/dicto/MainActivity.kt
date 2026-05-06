@@ -246,7 +246,7 @@ private fun DictationScreen(
                 speechMode = state.speechModeLabel,
                 status = state.statusMessage,
             )
-            WhisperDebugPanel(
+            DictationEngineDebugPanel(
                 engineSettings = engineSettings,
                 onEngineChoiceSelected = onEngineChoiceSelected,
                 onImportWhisperModel = onImportWhisperModel,
@@ -307,7 +307,7 @@ private fun DictationScreen(
 }
 
 @Composable
-private fun WhisperDebugPanel(
+private fun DictationEngineDebugPanel(
     engineSettings: DictationEngineSettingsState,
     onEngineChoiceSelected: (DictationEngineChoice) -> Unit,
     onImportWhisperModel: () -> Unit,
@@ -334,6 +334,11 @@ private fun WhisperDebugPanel(
                     selected = engineSettings.choice == DictationEngineChoice.Whisper,
                     onClick = { onEngineChoiceSelected(DictationEngineChoice.Whisper) },
                 )
+                EngineChoiceButton(
+                    label = "Vosk local",
+                    selected = engineSettings.choice == DictationEngineChoice.Vosk,
+                    onClick = { onEngineChoiceSelected(DictationEngineChoice.Vosk) },
+                )
             }
             Text(
                 "Whisper native: ${if (engineSettings.whisperNativeAvailable) "available" else "not available"}",
@@ -344,6 +349,15 @@ private fun WhisperDebugPanel(
                 color = Color(0xFFEFE1C8),
             )
             Text(engineSettings.modelPath, color = Color(0xFFCABCA4), style = MaterialTheme.typography.bodySmall)
+            Text(
+                "Vosk bundled model: ${if (engineSettings.voskBundledModelExists) "available" else "missing"}",
+                color = Color(0xFFEFE1C8),
+            )
+            Text(
+                "Vosk copied model: ${if (engineSettings.voskModelExists) "found" else "missing"}",
+                color = Color(0xFFEFE1C8),
+            )
+            Text(engineSettings.voskModelPath, color = Color(0xFFCABCA4), style = MaterialTheme.typography.bodySmall)
             Button(onClick = onImportWhisperModel) {
                 Text("Import Whisper .bin")
             }

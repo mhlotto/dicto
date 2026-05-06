@@ -8,6 +8,9 @@ plugins {
 android {
     namespace = "com.mhlotto.dicto"
     compileSdk = 35
+    val whisperModelAsset = providers.gradleProperty("dicto.whisperModelAsset")
+        .orElse("ggml-tiny.en.bin")
+        .get()
 
     defaultConfig {
         applicationId = "com.mhlotto.dicto"
@@ -15,6 +18,7 @@ android {
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
+        buildConfigField("String", "WHISPER_MODEL_ASSET", "\"$whisperModelAsset\"")
 
         ndk {
             abiFilters += listOf("arm64-v8a")
@@ -22,6 +26,7 @@ android {
     }
 
     buildFeatures {
+        buildConfig = true
         compose = true
     }
 
@@ -62,6 +67,7 @@ dependencies {
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
     implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.vosk.android)
     ksp(libs.androidx.room.compiler)
 
     debugImplementation(libs.androidx.compose.ui.tooling)

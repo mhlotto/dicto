@@ -5,16 +5,25 @@ Dicto has a replaceable `DictationEngine` abstraction. The default engine remain
 
 ## Model File
 
-For development, Dicto packages `ggml-tiny.en.bin` in:
+For development, Dicto packages Whisper models in:
 
 ```text
-app/src/main/assets/models/ggml-tiny.en.bin
+app/src/main/assets/models/
 ```
 
-On first launch or before Whisper engine selection, `WhisperModelManager` copies that asset to:
+The default build uses `ggml-tiny.en.bin`. Override it at build time:
+
+```bash
+gradle :app:assembleDebug \
+  -Pdicto.enableWhisperNative=true \
+  -Pdicto.whisperModelAsset=ggml-base.en-q5_1.bin
+```
+
+On first launch or before Whisper engine selection, `WhisperModelManager` copies the configured
+asset to:
 
 ```text
-/data/data/com.mhlotto.dicto/files/models/ggml-tiny.en.bin
+/data/data/com.mhlotto.dicto/files/models/<configured-model-file>
 ```
 
 The copy only runs when the internal file is missing or its size differs from the asset.

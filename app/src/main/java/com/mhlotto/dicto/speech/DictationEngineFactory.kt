@@ -11,16 +11,20 @@ class DictationEngineFactory(
         if (initialState.choice == DictationEngineChoice.Auto || initialState.choice == DictationEngineChoice.Whisper) {
             runCatching { settings.ensureDefaultModelAvailable() }
         }
-        val state = settings.state.value
-        val useWhisper = when (state.choice) {
-            DictationEngineChoice.SpeechRecognizer -> false
-            DictationEngineChoice.Whisper -> true
-            DictationEngineChoice.Auto -> state.whisperNativeAvailable && state.whisperModelExists
+        if (initialState.choice == DictationEngineChoice.Auto || initialState.choice == DictationEngineChoice.Vosk) {
+            runCatching { settings.ensureDefaultVoskModelAvailable() }
         }
-        return if (useWhisper) {
-            WhisperDictationEngine(modelPath = state.modelPath)
-        } else {
-            SpeechRecognizerDictationEngine(context.applicationContext)
+        val state = settings.state.value
+        val voskCanLoad = state.voskModelExists && VoskModelManager.canLoadDefaultModel(context.applicationContext)
+        return when (state.choice) {
+            DictationEngineChoice.SpeechRecognizer -> SpeechRecognizerDictationEngine(context.applicationContext)
+            DictationEngineChoice.Whisper -> WhisperDictationEngine(modelPath = state.modelPath)
+            DictationEngineChoice.Vosk -> VoskDictationEngine(context.applicationContext)
+            DictationEngineChoice.Auto -> when {
+                state.whisperNativeAvailable && state.whisperModelExists -> WhisperDictationEngine(modelPath = state.modelPath)
+                voskCanLoad -> VoskDictationEngine(context.applicationContext)
+                else -> SpeechRecognizerDictationEngine(context.applicationContext)
+            }
         }
     }
 }

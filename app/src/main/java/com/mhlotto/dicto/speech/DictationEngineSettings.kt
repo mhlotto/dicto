@@ -11,19 +11,24 @@ import java.io.File
 enum class DictationEngineChoice {
     SpeechRecognizer,
     Whisper,
+    Vosk,
     Auto,
 }
 
 data class DictationEngineSettingsState(
     val choice: DictationEngineChoice = DictationEngineChoice.Auto,
     val modelPath: String,
+    val voskModelPath: String,
     val whisperNativeAvailable: Boolean = false,
     val whisperModelExists: Boolean = false,
+    val voskModelExists: Boolean = false,
+    val voskBundledModelExists: Boolean = false,
 ) {
     val selectedEngineLabel: String
         get() = when (choice) {
             DictationEngineChoice.SpeechRecognizer -> "SpeechRecognizer"
             DictationEngineChoice.Whisper -> "Whisper local"
+            DictationEngineChoice.Vosk -> "Vosk local"
             DictationEngineChoice.Auto -> "Auto"
         }
 }
@@ -60,6 +65,12 @@ class DictationEngineSettings(context: Context) {
         }
     }
 
+    fun ensureDefaultVoskModelAvailable(): File {
+        return VoskModelManager.ensureDefaultModelAvailable(appContext).also {
+            refresh()
+        }
+    }
+
     fun importModel(displayName: String?, bytes: ByteArray): String {
         val modelDir = File(appContext.filesDir, "models").also { it.mkdirs() }
         val safeName = displayName
@@ -80,8 +91,11 @@ class DictationEngineSettings(context: Context) {
         return DictationEngineSettingsState(
             choice = choice,
             modelPath = modelPath,
+            voskModelPath = VoskModelManager.getDefaultModelDir(appContext).absolutePath,
             whisperNativeAvailable = WhisperNative.isAvailable,
             whisperModelExists = File(modelPath).isFile,
+            voskModelExists = VoskModelManager.hasDefaultModel(appContext),
+            voskBundledModelExists = VoskModelManager.hasBundledDefaultModel(appContext),
         )
     }
 

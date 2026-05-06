@@ -2,7 +2,16 @@ codex.resume
 .gradle/
 build/
 app/build/
+app/.cxx/
 local.properties
 *.iml
 .idea/
 .DS_Store
+
+github.com-google-live-transcribe-speech-engine/
+github.com-Almost-Senseless-Tech-Voskle-Live-Transcribe-Android/
+
+# toobig
+app/src/main/assets/models/ggml-tiny.en.bin
+app/src/main/assets/models/ggml-base.en-q5_1.bin
+app/src/main/assets/models/vosk-model-small-en-us-0.15/

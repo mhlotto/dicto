@@ -279,22 +279,30 @@ class AppViewModel(
     }
 
     private fun onDictationState(state: DictationState) {
-        _dictationState.value = state
+        val formattedState = state.withFormattedCommands()
+        _dictationState.value = formattedState
         state.activeProjectId?.let { projectId ->
             val draft = draftFor(projectId)
-            draft.committedText = state.committedText
-            draft.partialText = state.partialText
+            draft.committedText = formattedState.committedText
+            draft.partialText = formattedState.partialText
             if (projectId == selectedProjectId.value) {
                 updateTranscriptState(projectId)
             }
         }
         _uiState.update {
             it.copy(
-                isRecording = state.isRecording,
-                speechModeLabel = state.engineLabel,
-                statusMessage = state.error ?: if (state.isRecording) "Listening" else it.statusMessage,
+                isRecording = formattedState.isRecording,
+                speechModeLabel = formattedState.engineLabel,
+                statusMessage = formattedState.error ?: if (formattedState.isRecording) "Listening" else it.statusMessage,
             )
         }
+    }
+
+    private fun DictationState.withFormattedCommands(): DictationState {
+        return copy(
+            committedText = DictationCommandFormatter.format(committedText),
+            partialText = DictationCommandFormatter.format(partialText),
+        )
     }
 
     private fun bindDictationEngine() {
