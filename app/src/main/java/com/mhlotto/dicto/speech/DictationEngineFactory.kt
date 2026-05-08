@@ -20,6 +20,7 @@ class DictationEngineFactory(
             DictationEngineChoice.SpeechRecognizer -> SpeechRecognizerDictationEngine(context.applicationContext)
             DictationEngineChoice.Whisper -> WhisperDictationEngine(modelPath = state.modelPath)
             DictationEngineChoice.Vosk -> VoskDictationEngine(context.applicationContext)
+            DictationEngineChoice.MlKitGenAi -> MlKitGenAiSpeechDictationEngine(context.applicationContext)
             DictationEngineChoice.Auto -> when {
                 state.whisperNativeAvailable && state.whisperModelExists -> WhisperDictationEngine(modelPath = state.modelPath)
                 voskCanLoad -> VoskDictationEngine(context.applicationContext)

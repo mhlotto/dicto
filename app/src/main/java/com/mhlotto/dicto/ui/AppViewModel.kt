@@ -4,6 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.mhlotto.dicto.DictoApplication
+import com.mhlotto.dicto.analysis.MlKitEntityTextAnalyzer
+import com.mhlotto.dicto.analysis.TextAnalysisResult
+import com.mhlotto.dicto.analysis.TextAnalyzer
 import com.mhlotto.dicto.data.DictoRepository
 import com.mhlotto.dicto.data.NoteEntity
 import com.mhlotto.dicto.data.ProjectEntity
@@ -42,6 +45,9 @@ data class AppUiState(
     val editBody: String = "",
     val editProjectId: Long? = null,
     val dictationCommandTrigger: String = DictationCommandFormatter.DEFAULT_TRIGGER_PHRASE,
+    val isAnalyzing: Boolean = false,
+    val analysisResults: TextAnalysisResult? = null,
+    val analysisError: String? = null,
 )
 
 sealed interface AppScreen {
@@ -55,6 +61,7 @@ class AppViewModel(
     private val dictationEngineFactory: DictationEngineFactory,
     private val dictationEngineSettings: DictationEngineSettings,
     private val dictationCommandSettings: DictationCommandSettings,
+    private val textAnalyzers: List<TextAnalyzer> = listOf(MlKitEntityTextAnalyzer()),
 ) : ViewModel() {
     private var dictationEngine = dictationEngineFactory.create()
     private val selectedProjectId = MutableStateFlow<Long?>(null)
@@ -261,6 +268,9 @@ class AppViewModel(
                     editTitle = note.title,
                     editBody = note.body,
                     editProjectId = note.projectId,
+                    analysisResults = null,
+                    analysisError = null,
+                    isAnalyzing = false,
                 )
             }
         }
@@ -290,6 +300,48 @@ class AppViewModel(
             repository.updateNote(noteId, state.editTitle.trim(), state.editBody, projectId)
             selectedProjectId.value = projectId
             _uiState.update { it.copy(statusMessage = "Note saved") }
+        }
+    }
+
+    fun analyzeEditNote() {
+        val body = uiState.value.editBody
+        val analyzer = textAnalyzers.firstOrNull() ?: return
+        if (body.isBlank()) {
+            _uiState.update {
+                it.copy(
+                    isAnalyzing = false,
+                    analysisResults = TextAnalysisResult(
+                        analyzerId = analyzer.id,
+                        entities = emptyList(),
+                        rawTextLength = 0,
+                        createdAt = System.currentTimeMillis(),
+                    ),
+                    analysisError = null,
+                )
+            }
+            return
+        }
+
+        viewModelScope.launch {
+            _uiState.update { it.copy(isAnalyzing = true, analysisError = null) }
+            runCatching { analyzer.analyze(body) }
+                .onSuccess { result ->
+                    _uiState.update {
+                        it.copy(
+                            isAnalyzing = false,
+                            analysisResults = result,
+                            analysisError = null,
+                        )
+                    }
+                }
+                .onFailure { error ->
+                    _uiState.update {
+                        it.copy(
+                            isAnalyzing = false,
+                            analysisError = error.message ?: "Text analysis failed",
+                        )
+                    }
+                }
         }
     }
 

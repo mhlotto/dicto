@@ -2,13 +2,15 @@ package com.mhlotto.dicto.ui
 
 object DictationCommandFormatter {
     const val DEFAULT_TRIGGER_PHRASE = "zeta"
+    private val spanCommandProcessor = DictationSpanCommandProcessor()
 
     fun format(
         text: String,
         triggerPhrase: String = DEFAULT_TRIGGER_PHRASE,
     ): String {
         if (text.isBlank()) return text
-        val tokens = text.trim().split(Regex("\\s+"))
+        val spanProcessedText = spanCommandProcessor.process(text, triggerPhrase)
+        val tokens = spanProcessedText.trim().split(Regex("\\s+"))
         val triggerWords = triggerPhrase.normalizedTriggerWords()
             .ifEmpty { DEFAULT_TRIGGER_PHRASE.normalizedTriggerWords() }
         val builder = StringBuilder()

@@ -66,7 +66,11 @@ dependencies {
     implementation(libs.androidx.room.ktx)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.vosk.android)
+    implementation(libs.mlkit.genai.speech.recognition)
+    implementation(libs.mlkit.entity.extraction)
     ksp(libs.androidx.room.compiler)
+
+    testImplementation(libs.junit)
 
     debugImplementation(libs.androidx.compose.ui.tooling)
 }

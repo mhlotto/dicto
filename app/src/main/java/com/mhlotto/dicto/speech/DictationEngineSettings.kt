@@ -12,6 +12,7 @@ enum class DictationEngineChoice {
     SpeechRecognizer,
     Whisper,
     Vosk,
+    MlKitGenAi,
     Auto,
 }
 
@@ -23,12 +24,15 @@ data class DictationEngineSettingsState(
     val whisperModelExists: Boolean = false,
     val voskModelExists: Boolean = false,
     val voskBundledModelExists: Boolean = false,
+    val mlKitGenAiApiCompatible: Boolean = false,
+    val mlKitGenAiAvailabilityReason: String? = null,
 ) {
     val selectedEngineLabel: String
         get() = when (choice) {
             DictationEngineChoice.SpeechRecognizer -> "SpeechRecognizer"
             DictationEngineChoice.Whisper -> "Whisper local"
             DictationEngineChoice.Vosk -> "Vosk local"
+            DictationEngineChoice.MlKitGenAi -> "ML Kit GenAI"
             DictationEngineChoice.Auto -> "Auto"
         }
 }
@@ -96,6 +100,9 @@ class DictationEngineSettings(context: Context) {
             whisperModelExists = File(modelPath).isFile,
             voskModelExists = VoskModelManager.hasDefaultModel(appContext),
             voskBundledModelExists = VoskModelManager.hasBundledDefaultModel(appContext),
+            mlKitGenAiApiCompatible = MlKitSpeechAvailability.apiCompatibilityReason() == null,
+            mlKitGenAiAvailabilityReason = MlKitSpeechAvailability.apiCompatibilityReason()
+                ?: "Availability checked when the engine starts",
         )
     }
 

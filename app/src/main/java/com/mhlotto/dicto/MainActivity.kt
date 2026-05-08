@@ -55,6 +55,8 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
+import com.mhlotto.dicto.analysis.ExtractedEntity
+import com.mhlotto.dicto.analysis.TextAnalysisResult
 import com.mhlotto.dicto.data.NoteEntity
 import com.mhlotto.dicto.data.ProjectEntity
 import com.mhlotto.dicto.speech.DictationEngineChoice
@@ -165,6 +167,7 @@ private fun DictoApp(viewModel: AppViewModel) {
                 onBodyChanged = viewModel::updateEditBody,
                 onProjectSelected = viewModel::updateEditProject,
                 onSave = viewModel::saveEdit,
+                onAnalyze = viewModel::analyzeEditNote,
                 onShare = { title, mime, text -> shareText(context, title, mime, text) },
             )
         }
@@ -345,6 +348,11 @@ private fun DictationEngineDebugPanel(
                     selected = engineSettings.choice == DictationEngineChoice.Vosk,
                     onClick = { onEngineChoiceSelected(DictationEngineChoice.Vosk) },
                 )
+                EngineChoiceButton(
+                    label = "ML Kit GenAI",
+                    selected = engineSettings.choice == DictationEngineChoice.MlKitGenAi,
+                    onClick = { onEngineChoiceSelected(DictationEngineChoice.MlKitGenAi) },
+                )
             }
             when (engineSettings.choice) {
                 DictationEngineChoice.Auto -> AutoEngineDetails(engineSettings)
@@ -354,6 +362,7 @@ private fun DictationEngineDebugPanel(
                     onImportWhisperModel = onImportWhisperModel,
                 )
                 DictationEngineChoice.Vosk -> VoskEngineDetails(engineSettings)
+                DictationEngineChoice.MlKitGenAi -> MlKitGenAiEngineDetails(engineSettings)
             }
             DictationCommandDetails(
                 triggerPhrase = dictationCommandTrigger,
@@ -411,6 +420,25 @@ private fun VoskEngineDetails(engineSettings: DictationEngineSettingsState) {
 }
 
 @Composable
+private fun MlKitGenAiEngineDetails(engineSettings: DictationEngineSettingsState) {
+    Text("Experimental ML Kit GenAI Speech Recognition alpha engine.", color = Color(0xFFEFE1C8))
+    Text(
+        "API compatibility: ${if (engineSettings.mlKitGenAiApiCompatible) "compatible" else "not compatible"}",
+        color = Color(0xFFEFE1C8),
+    )
+    Text(
+        engineSettings.mlKitGenAiAvailabilityReason ?: "Availability checked when the engine starts",
+        color = Color(0xFFCABCA4),
+        style = MaterialTheme.typography.bodySmall,
+    )
+    Text(
+        "Auto mode will not select this alpha engine.",
+        color = Color(0xFFCABCA4),
+        style = MaterialTheme.typography.bodySmall,
+    )
+}
+
+@Composable
 private fun DictationCommandDetails(
     triggerPhrase: String,
     onTriggerPhraseChanged: (String) -> Unit,
@@ -451,6 +479,7 @@ private fun EditScreen(
     onBodyChanged: (String) -> Unit,
     onProjectSelected: (Long) -> Unit,
     onSave: () -> Unit,
+    onAnalyze: () -> Unit,
     onShare: (String, String, String) -> Unit,
 ) {
     val selectedProject = state.projects.firstOrNull { it.id == state.editProjectId }
@@ -462,11 +491,6 @@ private fun EditScreen(
             .padding(20.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            TextButton(onClick = onBack) { Text("Back") }
-            Spacer(Modifier.weight(1f))
-            Button(onClick = onSave) { Text("Save") }
-        }
         Text(
             text = "Manual edit",
             style = MaterialTheme.typography.headlineLarge,
@@ -506,6 +530,11 @@ private fun EditScreen(
             label = { Text("Body") },
             colors = editFieldColors,
         )
+        TextAnalysisPanel(
+            isAnalyzing = state.isAnalyzing,
+            result = state.analysisResults,
+            error = state.analysisError,
+        )
         Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
             TextButton(
                 onClick = {
@@ -535,6 +564,78 @@ private fun EditScreen(
                 Text("Share JSON")
             }
         }
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            TextButton(onClick = onBack) { Text("Back") }
+            Spacer(Modifier.weight(1f))
+            Button(
+                onClick = onAnalyze,
+                enabled = !state.isAnalyzing && state.editBody.isNotBlank(),
+            ) {
+                Text(if (state.isAnalyzing) "Analyzing..." else "Analyze text")
+            }
+            Spacer(Modifier.width(10.dp))
+            Button(onClick = onSave) { Text("Save") }
+        }
+    }
+}
+
+@Composable
+private fun TextAnalysisPanel(
+    isAnalyzing: Boolean,
+    result: TextAnalysisResult?,
+    error: String?,
+) {
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(containerColor = Color(0xFF151515)),
+    ) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            Text("Text analysis", color = Color(0xFFF4C95D), fontWeight = FontWeight.Black)
+            when {
+                isAnalyzing -> Text("Downloading model or analyzing text...", color = Color(0xFFEFE1C8))
+                error != null -> Text(error, color = Color(0xFFB94D3A))
+                result == null -> Text("Run analysis to extract entities from this saved note.", color = Color(0xFFCABCA4))
+                result.entities.isEmpty() -> Text("No entities found.", color = Color(0xFFEFE1C8))
+                else -> {
+                    result.entities
+                        .groupBy { it.displayGroup() }
+                        .toSortedMap()
+                        .forEach { (group, entities) ->
+                            Text(group, color = Color(0xFFD9A86C), fontWeight = FontWeight.Bold)
+                            entities.forEach { entity ->
+                                ExtractedEntityRow(entity)
+                            }
+                        }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun ExtractedEntityRow(entity: ExtractedEntity) {
+    Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
+        Text(entity.text, color = Color(0xFFF5EFE6), fontWeight = FontWeight.SemiBold)
+        Text(entity.type, color = Color(0xFFCABCA4), style = MaterialTheme.typography.bodySmall)
+        if (entity.metadata.isNotEmpty()) {
+            Text(
+                entity.metadata.entries.joinToString(" | ") { "${it.key}: ${it.value}" },
+                color = Color(0xFF8BC6A8),
+                style = MaterialTheme.typography.bodySmall,
+            )
+        }
+    }
+}
+
+private fun ExtractedEntity.displayGroup(): String {
+    return when (type.lowercase()) {
+        "date time" -> "Dates and times"
+        "address" -> "Addresses"
+        "phone" -> "Phone numbers"
+        "email" -> "Emails"
+        "url" -> "URLs"
+        "money" -> "Money"
+        else -> "Other"
     }
 }
 
