@@ -197,6 +197,7 @@ private fun DictationScreen(
     val selectedProject = state.projects.firstOrNull { it.id == state.selectedProjectId }
     val projectName = selectedProject?.name.orEmpty()
     val scroll = rememberScrollState()
+    var showSettings by remember { mutableStateOf(false) }
 
     Box(
         modifier = Modifier
@@ -211,10 +212,24 @@ private fun DictationScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .verticalScroll(scroll)
-                .padding(20.dp),
+                .padding(start = 20.dp, top = 20.dp, end = 20.dp, bottom = 156.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             Header()
+            SettingsMenuToggle(
+                engineLabel = engineSettings.selectedEngineLabel,
+                showSettings = showSettings,
+                onToggle = { showSettings = !showSettings },
+            )
+            if (showSettings) {
+                DictationSettingsPanel(
+                    engineSettings = engineSettings,
+                    dictationCommandTrigger = state.dictationCommandTrigger,
+                    onEngineChoiceSelected = onEngineChoiceSelected,
+                    onDictationCommandTriggerChanged = onDictationCommandTriggerChanged,
+                    onImportWhisperModel = onImportWhisperModel,
+                )
+            }
             ProjectBar(
                 projects = state.projects,
                 selectedProjectId = state.selectedProjectId,
@@ -230,46 +245,32 @@ private fun DictationScreen(
                 label = { Text("Note title for $projectName") },
                 singleLine = true,
             )
-            Button(
-                onClick = onStartStop,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(112.dp),
-                shape = RoundedCornerShape(32.dp),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = if (dictationState.isRecording) Color(0xFFB94D3A) else Color(0xFFF4C95D),
-                    contentColor = Color(0xFF1D1811),
-                ),
-            ) {
-                Text(
-                    text = if (dictationState.isRecording) "Stop dictation" else "Start dictation",
-                    style = MaterialTheme.typography.headlineMedium,
-                    fontWeight = FontWeight.Black,
-                )
-            }
             StatusPanel(
                 hasAudioPermission = hasAudioPermission,
                 speechMode = state.speechModeLabel,
                 status = state.statusMessage,
             )
-            DictationEngineDebugPanel(
-                engineSettings = engineSettings,
-                dictationCommandTrigger = state.dictationCommandTrigger,
-                onEngineChoiceSelected = onEngineChoiceSelected,
-                onDictationCommandTriggerChanged = onDictationCommandTriggerChanged,
-                onImportWhisperModel = onImportWhisperModel,
-            )
             TranscriptCard(title = "Live partial", body = state.livePartial, accent = Color(0xFF8BC6A8))
             TranscriptCard(title = "Committed transcript", body = state.committedTranscript, accent = Color(0xFFD9A86C))
-            Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+            Row(
+                modifier = Modifier.horizontalScroll(rememberScrollState()),
+                horizontalArrangement = Arrangement.spacedBy(10.dp),
+            ) {
                 Button(onClick = onSaveDraft, enabled = state.rollingDraft.isNotBlank()) {
                     Text("Save to $projectName")
                 }
                 Button(onClick = onSaveAndEdit, enabled = state.rollingDraft.isNotBlank()) {
                     Text("Save & edit")
                 }
-                TextButton(onClick = onClearDraft, enabled = state.rollingDraft.isNotBlank()) {
-                    Text("Clear draft")
+                Button(
+                    onClick = onClearDraft,
+                    enabled = state.rollingDraft.isNotBlank(),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color(0xFFB94D3A),
+                        contentColor = Color(0xFFF5EFE6),
+                    ),
+                ) {
+                    Text("Discard")
                 }
             }
             Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
@@ -310,11 +311,77 @@ private fun DictationScreen(
                 onShare = onShare,
             )
         }
+        FloatingDictationButton(
+            dictationState = dictationState,
+            onStartStop = onStartStop,
+            modifier = Modifier.align(Alignment.BottomCenter),
+        )
     }
 }
 
 @Composable
-private fun DictationEngineDebugPanel(
+private fun SettingsMenuToggle(
+    engineLabel: String,
+    showSettings: Boolean,
+    onToggle: () -> Unit,
+) {
+    Card(colors = CardDefaults.cardColors(containerColor = Color(0xFF2A241B))) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+        ) {
+            Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                Text("Settings", color = Color(0xFFF4C95D), fontWeight = FontWeight.Black)
+                Text("Engine: $engineLabel", color = Color(0xFFCABCA4), style = MaterialTheme.typography.bodySmall)
+            }
+            TextButton(onClick = onToggle) {
+                Text(if (showSettings) "Hide" else "Open")
+            }
+        }
+    }
+}
+
+@Composable
+private fun FloatingDictationButton(
+    dictationState: DictationState,
+    onStartStop: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .background(
+                Brush.verticalGradient(
+                    listOf(Color.Transparent, Color(0xF21D1811)),
+                ),
+            )
+            .padding(start = 20.dp, top = 20.dp, end = 20.dp, bottom = 20.dp),
+    ) {
+        Button(
+            onClick = onStartStop,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(104.dp),
+            shape = RoundedCornerShape(32.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = if (dictationState.isRecording) Color(0xFFB94D3A) else Color(0xFFF4C95D),
+                contentColor = Color(0xFF1D1811),
+            ),
+        ) {
+            Text(
+                text = if (dictationState.isRecording) "Stop dictation" else "Start dictation",
+                style = MaterialTheme.typography.headlineMedium,
+                fontWeight = FontWeight.Black,
+            )
+        }
+    }
+}
+
+@Composable
+private fun DictationSettingsPanel(
     engineSettings: DictationEngineSettingsState,
     dictationCommandTrigger: String,
     onEngineChoiceSelected: (DictationEngineChoice) -> Unit,

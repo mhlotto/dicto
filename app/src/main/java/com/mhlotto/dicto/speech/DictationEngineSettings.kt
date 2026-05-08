@@ -17,7 +17,7 @@ enum class DictationEngineChoice {
 }
 
 data class DictationEngineSettingsState(
-    val choice: DictationEngineChoice = DictationEngineChoice.Auto,
+    val choice: DictationEngineChoice = DictationEngineChoice.Vosk,
     val modelPath: String,
     val voskModelPath: String,
     val whisperNativeAvailable: Boolean = false,
@@ -88,9 +88,9 @@ class DictationEngineSettings(context: Context) {
     }
 
     private fun loadState(): DictationEngineSettingsState {
-        val choiceName = prefs.getString(KEY_ENGINE_CHOICE, DictationEngineChoice.Auto.name)
+        val choiceName = prefs.getString(KEY_ENGINE_CHOICE, DictationEngineChoice.Vosk.name)
         val choice = runCatching { DictationEngineChoice.valueOf(choiceName ?: "") }
-            .getOrDefault(DictationEngineChoice.Auto)
+            .getOrDefault(DictationEngineChoice.Vosk)
         val modelPath = prefs.getString(KEY_MODEL_PATH, defaultModelPath) ?: defaultModelPath
         return DictationEngineSettingsState(
             choice = choice,
